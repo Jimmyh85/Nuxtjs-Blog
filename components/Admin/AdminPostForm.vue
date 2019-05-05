@@ -3,6 +3,7 @@
     <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
     <AppControlInput v-model="editedPost.title">Title</AppControlInput>
     <AppControlInput v-model="editedPost.thumbnailLink">Thumbnail Link</AppControlInput>
+    <AppControlInput control-type="textarea" v-model="editedPost.previewContent">Preview Content</AppControlInput>
     <AppControlInput control-type="textarea" v-model="editedPost.content">Content</AppControlInput>
     <AppButton type="submit">Save</AppButton>
     <AppButton type="button" style="margin-left: 10px" btn-style="cancel" @click="onCancel">Cancel</AppButton>
@@ -10,14 +11,7 @@
 </template>
 
 <script>
-import AppControlInput from "@/components/UI/AppControlInput";
-import AppButton from "@/components/UI/AppButton";
-
 export default {
-  components: {
-    AppControlInput,
-    AppButton
-  },
   props: {
     post: {
       type: Object,
@@ -32,13 +26,17 @@ export default {
             author: "",
             title: "",
             thumbnailLink: "",
-            content: ""
+            previewContent: "",
+            content: "",
+            updated: ""
           }
     };
   },
   methods: {
     onSave() {
       // Save the post
+      this.editedPost.updated = new Date();
+      this.$emit("submit", this.editedPost);
       console.log(this.editedPost);
     },
     onCancel() {

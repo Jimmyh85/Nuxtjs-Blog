@@ -6,8 +6,8 @@
       :id="post.id"
       :is-admin="isAdmin"
       :title="post.title"
-      :preview-text="post.preview"
-      :thumbnail="post.thumbnail"
+      :preview-text="post.previewContent"
+      :thumbnail="post.thumbnailLink"
     />
   </section>
 </template>

@@ -3,7 +3,7 @@
     <section class="post">
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on {{ loadedPost.updated }}</div>
+        <div class="post-detail">Last updated on {{ loadedPost.updated | formatDate }}</div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
@@ -21,30 +21,26 @@
 
 
 <script>
-export default {
-  async asyncData(context) {
-    let result = await new Promise((resolve, reject) =>
-      setTimeout(() => resolve(getPost(context.params.id)), 1000)
-    );
+import axios from "axios";
 
-    return result;
+export default {
+  asyncData(context) {
+    return axios
+      .get(
+        process.env.FIREBASE_BASE_URL + "/posts/" + context.params.id + ".json"
+      )
+      .then(function(response) {
+        // handle success
+        return {
+          loadedPost: response.data
+        };
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      });
   }
 };
-
-function getPost(id) {
-  return {
-    loadedPost: {
-      id: "1",
-      title: "Serious stuff (ID: " + id + ")",
-      preview: "Are you interessted...",
-      thumbnail:
-        "https://miro.medium.com/max/960/1*wqmBDlLR8LKYboTnpPSn0A.jpeg",
-      author: "Hendrik",
-      updated: new Date(),
-      content: "This is the awesome content of the post"
-    }
-  };
-}
 </script>
 
 <style scoped>
