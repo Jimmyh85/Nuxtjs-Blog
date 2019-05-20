@@ -12,6 +12,7 @@ import AdminPostForm from "@/components/Admin/AdminPostForm";
 
 export default {
   layout: "admin",
+  middleware: "auth-guard",
   components: {
     AdminPostForm
   },
@@ -36,7 +37,7 @@ export default {
   },
   methods: {
     onSubmitted(editedPost) {
-      this.$store.dispatch("editPost", editedPost).then(() => {
+      this.$store.dispatch("posts/editPost", editedPost).then(() => {
         this.$router.push("/admin");
       });
     }

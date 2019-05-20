@@ -10,7 +10,7 @@
 export default {
   computed: {
     loadedPosts() {
-      return this.$store.getters.loadedPosts;
+      return this.$store.getters["posts/loadedPosts"];
     }
   }
 };

@@ -35,9 +35,8 @@ export default {
   methods: {
     onSave() {
       // Save the post
-      this.editedPost.updated = new Date();
+      this.editedPost.updated = Date();
       this.$emit("submit", this.editedPost);
-      console.log(this.editedPost);
     },
     onCancel() {
       // Navigate back

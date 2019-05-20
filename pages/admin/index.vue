@@ -13,10 +13,10 @@
 <script>
 export default {
   layout: "admin",
-
+  middleware: "auth-guard",
   computed: {
     loadedPosts() {
-      return this.$store.getters.loadedPosts;
+      return this.$store.getters["posts/loadedPosts"];
     }
   }
 };

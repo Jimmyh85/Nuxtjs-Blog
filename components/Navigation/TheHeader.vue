@@ -17,6 +17,9 @@
           <li class="nav-item">
             <nuxt-link to="/admin">Admin</nuxt-link>
           </li>
+          <li class="nav-item">
+            <a href="#" @click="logout" v-if="isAuthenticated">Logout</a>
+          </li>
         </ul>
       </div>
     </header>
@@ -35,6 +38,18 @@ export default {
     headerClass: {
       type: String,
       default: "black"
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("auth/signOut").then(() => {
+        this.$router.push("/");
+      });
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters["auth/isAuthenticated"];
     }
   }
 };

@@ -12,12 +12,13 @@ import AdminPostForm from "@/components/Admin/AdminPostForm";
 
 export default {
   layout: "admin",
+  middleware: "auth-guard",
   components: {
     AdminPostForm
   },
   methods: {
     onSubmitted(postData) {
-      this.$store.dispatch("addPost", postData).then(() => {
+      this.$store.dispatch("posts/addPost", postData).then(() => {
         this.$router.push("/admin");
       });
     }

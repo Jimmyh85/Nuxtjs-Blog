@@ -35,7 +35,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/core-components.js', '~/plugins/date-filter.js'],
+  plugins: [
+    '~/plugins/core-components.js',
+    '~/plugins/date-filter.js',
+    '~/plugins/auth-listener.js'
+  ],
 
   /*
    ** Nuxt.js modules
@@ -54,5 +58,9 @@ export default {
 
   env: {
     FIREBASE_BASE_URL: 'https://nuxtjs-blog-af759.firebaseio.com'
+  },
+
+  router: {
+    middleware: 'log'
   }
 };
